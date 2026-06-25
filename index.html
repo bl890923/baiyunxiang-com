@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>四川佰运翔交通设施 | 石笼网·主动网·被动网</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== 全局重置 & 基础 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f9ff;
+            color: #1a2c3e;
+            line-height: 1.5;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .page.active-page {
+            display: block;
+            opacity: 1;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== 导航 ===== */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 1px 0 #e9edf2;
+            position: relative;
+            z-index: 100;
+            padding: 16px 0;
+        }
+        .navbar .container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .logo-area h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1C5D7A, #2C8FAD);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        .logo-area p {
+            font-size: 0.8rem;
+            color: #5e7a93;
+            font-weight: 500;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #2c3e4e;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            cursor: pointer;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover {
+            color: #1C7C9E;
+            border-bottom-color: #1C7C9E;
+        }
+        .hotline-nav {
+            background: #EEF2F7;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-weight: 700;
+            color: #1C5D7A;
+            font-size: 0.9rem;
+        }
+        .hotline-nav i {
+            margin-right: 6px;
+            color: #E67E22;
+        }
+
+        /* ===== 通用区块 ===== */
+        .section-light {
+            background: #ffffff;
+            color: #1e2f3e;
+        }
+        .section-dark {
+            background: #f0f4f9;
+            color: #1e2f3e;
+        }
+        .section-padding {
+            padding: 70px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+            letter-spacing: -0.5px;
+            color: #1f4e6e;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 3px;
+            background: #E67E22;
+            margin: 16px auto 0;
+            border-radius: 4px;
+        }
+
+        /* ===== 卡片网格 ===== */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .grid-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+        .grid-4-12 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .img-card {
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
+            transition: 0.3s;
+            border: 1px solid #eef2f6;
+        }
+        .img-card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+            transition: 0.3s;
+        }
+        .img-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
+            border-color: #cbdde9;
+        }
+
+        /* ===== 横向滚动 ===== */
+        .scroll-x-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            scroll-behavior: smooth;
+            padding-bottom: 16px;
+            cursor: grab;
+        }
+        .scroll-x-wrapper:active {
+            cursor: grabbing;
+        }
+        .scroll-x-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+        .scroll-x-wrapper::-webkit-scrollbar-thumb {
+            background: #C0CFDA;
+            border-radius: 20px;
+        }
+        .scroll-flex {
+            display: inline-flex;
+            gap: 20px;
+        }
+        .scroll-item {
+            width: 250px;
+            display: inline-block;
+            white-space: normal;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.05);
+        }
+        .scroll-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        /* ===== 优势卡片 ===== */
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .art-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 36px;
+            padding: 32px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(28, 93, 122, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+        }
+        .art-card i {
+            font-size: 48px;
+            background: linear-gradient(135deg, #1C5D7A, #2C8FAD);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .art-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .art-card p {
+            color: #4a627a;
+        }
+        .art-card:hover {
+            transform: translateY(-6px);
+            border-color: #E67E22;
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ===== 合作伙伴（交通类国企） ===== */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 24px;
+        }
+        .partner-item {
+            background: white;
+            padding: 18px 10px;
+            border-radius: 28px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e9edf2;
+            transition: all 0.2s;
+        }
+        .partner-item i {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #1C5D7A;
+        }
+        .partner-item span {
+            font-weight: 500;
+            display: block;
+            font-size: 0.9rem;
+            color: #1a2c3e;
+        }
+        .partner-item:hover {
+            background: #fef9e6;
+            border-color: #E67E22;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        /* ===== 广告条 ===== */
+        .ad-banner {
+            background: linear-gradient(95deg, #1F5E7C, #3087A8);
+            color: white;
+            font-weight: 600;
+            padding: 18px 28px;
+            border-radius: 50px;
+            margin: 48px 0 20px;
+            text-align: center;
+            font-size: 1.05rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+        }
+        .ad-banner i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* ===== 新闻 ===== */
+        .news-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .news-item {
+            background: #ffffff;
+            padding: 16px 20px;
+            border-radius: 24px;
+            border-left: 5px solid #E67E22;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+        .news-item a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #1f4e6e;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .news-item a i {
+            color: #E67E22;
+            font-size: 1.2rem;
+        }
+        .news-item:hover {
+            background: #fefaf5;
+            transform: translateX(4px);
+        }
+
+        /* ================================================================
+           关于佰运翔（首页）
+           ================================================================ */
+        .about-home-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            background: linear-gradient(145deg, #f8fcff 0%, #eef4f9 100%);
+            border-radius: 48px;
+            padding: 50px 45px;
+            border: 1px solid rgba(28, 93, 122, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            align-items: stretch;
+        }
+        .about-left {
+            flex: 1.8;
+            min-width: 280px;
+        }
+        .about-left h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #1f4e6e;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .about-left h2 i {
+            color: #E67E22;
+            margin-right: 10px;
+        }
+        .about-left .tagline {
+            font-size: 1.1rem;
+            color: #4a627a;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            border-left: 4px solid #E67E22;
+            padding-left: 18px;
+        }
+        .about-left .desc {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #2c4052;
+            margin-bottom: 24px;
+        }
+        .about-left .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 40px;
+            margin-bottom: 28px;
+        }
+        .stats-row .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .stats-row .stat-item .num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1C5D7A;
+        }
+        .stats-row .stat-item .lbl {
+            font-size: 0.95rem;
+            color: #4a627a;
+            font-weight: 500;
+        }
+        .about-left .btn-about {
+            display: inline-block;
+            background: #1C5D7A;
+            color: white;
+            padding: 12px 34px;
+            border-radius: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(28, 93, 122, 0.15);
+        }
+        .about-left .btn-about:hover {
+            background: #133f54;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(28, 93, 122, 0.25);
+        }
+        .about-right {
+            flex: 1.2;
+            min-width: 220px;
+            background: white;
+            border-radius: 32px;
+            padding: 30px 26px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e9edf2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .about-right h3 {
+            font-size: 1.3rem;
+            color: #1f5a78;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .about-right h3 i {
+            color: #E67E22;
+        }
+        .about-right ul {
+            list-style: none;
+        }
+        .about-right ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f4f9;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: #1f2f3e;
+        }
+        .about-right ul li i {
+            color: #E67E22;
+            width: 22px;
+        }
+        .about-right .time-line {
+            margin-top: 20px;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 16px 18px;
+        }
+        .about-right .time-line p {
+            font-size: 0.9rem;
+            color: #4a627a;
+            margin-bottom: 4px;
+        }
+        .about-right .time-line .highlight {
+            font-weight: 700;
+            color: #1C5D7A;
+        }
+
+        /* ===== 公司简介内页 ===== */
+        .about-page-hero {
+            background: linear-gradient(135deg, #1f5a78, #103f52);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .about-page-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+        .about-page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 12px;
+        }
+        .about-page-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .about-page-content .text-col {
+            flex: 2;
+            min-width: 280px;
+        }
+        .about-page-content .text-col p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            color: #1f2f3e;
+        }
+        .about-page-content .side-col {
+            flex: 1;
+            min-width: 220px;
+            background: #eef3f8;
+            border-radius: 32px;
+            padding: 28px 24px;
+        }
+        .about-page-content .side-col h3 {
+            color: #1f5a78;
+            margin-bottom: 16px;
+            font-size: 1.4rem;
+        }
+        .about-page-content .side-col ul {
+            list-style: none;
+        }
+        .about-page-content .side-col ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid #d0dce8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .about-page-content .side-col ul li i {
+            color: #E67E22;
+            width: 24px;
+        }
+
+        /* ===== 联系方式内页 ===== */
+        .contact-page-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .contact-info-card {
+            flex: 1.2;
+            min-width: 260px;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 36px 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e9edf2;
+        }
+        .contact-info-card h2 {
+            font-size: 1.8rem;
+            color: #1f5a78;
+            margin-bottom: 24px;
+        }
+        .contact-info-card .info-line {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f4f9;
+        }
+        .contact-info-card .info-line i {
+            width: 30px;
+            color: #E67E22;
+            font-size: 1.2rem;
+        }
+        .contact-info-card .info-line span {
+            font-weight: 500;
+            color: #1a2c3e;
+        }
+        .contact-form-card {
+            flex: 2;
+            min-width: 280px;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 36px 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e9edf2;
+        }
+        .contact-form-card h2 {
+            font-size: 1.8rem;
+            color: #1f5a78;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #2c4052;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #dce5ec;
+            border-radius: 16px;
+            font-size: 1rem;
+            transition: 0.2s;
+            background: #fafcff;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #1C7C9E;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(28, 124, 158, 0.1);
+        }
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .btn-submit {
+            background: #1C5D7A;
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 14px 36px;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-submit:hover {
+            background: #133f54;
+            transform: translateY(-2px);
+        }
+
+        /* ================================================================
+           首页英雄区 —— 5种风格 + 百叶窗切换
+           ================================================================ */
+        .hero-wrapper {
+            position: relative;
+            width: 100%;
+            height: 540px;
+            overflow: hidden;
+            background: #0b1a26;
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: none;
+            will-change: transform, opacity;
+        }
+        .hero-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 1;
+        }
+        .hero-slide .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 0 24px;
+            max-width: 900px;
+            width: 100%;
+        }
+        .hero-slide h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .hero-slide .sub-title {
+            font-size: 1.3rem;
+            opacity: 0.85;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+        .hero-slide .hero-phone {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 34px;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 18px 0 22px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+        .hero-slide .hero-phone i { font-size: 1.6rem; }
+        .hero-slide .hero-phone a { color: #fff; text-decoration: none; }
+        .hero-slide .hero-slogan {
+            display: flex;
+            justify-content: center;
+            gap: 36px;
+            flex-wrap: wrap;
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.85;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding-top: 18px;
+        }
+        .hero-slide .hero-slogan span { display: flex; align-items: center; gap: 8px; }
+        .hero-slide .hero-slogan i { font-size: 1.1rem; }
+
+        /* ---- 风格1 ---- */
+        .hero-style-1 {
+            background: linear-gradient(125deg, #1a4a5e, #0d3a4f, #1f6a7a, #1a4a5e);
+            background-size: 400% 400%;
+            animation: gradFlow1 16s ease infinite;
+        }
+        @keyframes gradFlow1 {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .hero-style-1 .deco {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            z-index: 0;
+            pointer-events: none;
+            animation: decoPulse 6s ease-in-out infinite alternate;
+        }
+        .hero-style-1 .deco-1 { width: 400px; height: 400px; top: -120px; right: -120px; animation-delay: 0s; }
+        .hero-style-1 .deco-2 { width: 280px; height: 280px; bottom: -80px; left: -80px; background: rgba(255,255,255,0.03); animation-delay: 2s; }
+        .hero-style-1 .deco-3 { width: 200px; height: 200px; top: 20%; left: 5%; background: rgba(230,126,34,0.05); animation-delay: 4s; }
+        .hero-style-1 .deco-4 { width: 160px; height: 160px; bottom: 30%; right: 10%; background: rgba(255,255,255,0.04); animation-delay: 1s; }
+        @keyframes decoPulse {
+            0% { transform: scale(0.8); opacity: 0.4; }
+            100% { transform: scale(1.2); opacity: 0.8; }
+        }
+        .hero-style-1 .light-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            border: 1px solid rgba(100, 200, 255, 0.08);
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+            animation: ringSpin1 20s linear infinite;
+        }
+        .ring-1a { width: 500px; height: 500px; border-color: rgba(100, 200, 255, 0.06); }
+        .ring-1b { width: 700px; height: 700px; animation-duration: 30s; border-color: rgba(100, 200, 255, 0.04); }
+        .ring-1c { width: 350px; height: 350px; animation-duration: 15s; border-color: rgba(230, 126, 34, 0.05); }
+        @keyframes ringSpin1 {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .hero-style-1 .float-particle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+            animation: floatUp var(--dur) ease-in-out infinite alternate;
+        }
+        .fp-1 { width: 12px; height: 12px; background: rgba(100, 200, 255, 0.3); top: 20%; left: 10%; --dur: 4s; box-shadow: 0 0 30px rgba(100,200,255,0.1); }
+        .fp-2 { width: 8px; height: 8px; background: rgba(230, 126, 34, 0.25); top: 60%; right: 15%; --dur: 5s; animation-delay: 1s; box-shadow: 0 0 20px rgba(230,126,34,0.08); }
+        .fp-3 { width: 16px; height: 16px; background: rgba(100, 200, 255, 0.2); top: 40%; left: 30%; --dur: 6s; animation-delay: 2s; box-shadow: 0 0 40px rgba(100,200,255,0.08); }
+        .fp-4 { width: 10px; height: 10px; background: rgba(230, 126, 34, 0.2); top: 70%; left: 60%; --dur: 4.5s; animation-delay: 0.5s; box-shadow: 0 0 25px rgba(230,126,34,0.06); }
+        .fp-5 { width: 14px; height: 14px; background: rgba(100, 200, 255, 0.25); top: 30%; right: 25%; --dur: 5.5s; animation-delay: 1.5s; box-shadow: 0 0 35px rgba(100,200,255,0.09); }
+        @keyframes floatUp {
+            0% { transform: translateY(0px) scale(0.8) rotate(0deg); opacity: 0.4; }
+            100% { transform: translateY(-80px) scale(1.4) rotate(180deg); opacity: 0.9; }
+        }
+        .hero-style-1 .hero-phone { background: rgba(255,255,255,0.13); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
+        .hero-style-1 .hero-phone i { color: #E67E22; }
+        .hero-style-1 .hero-slogan i { color: #E67E22; }
+
+        /* ---- 风格2 ---- */
+        .hero-style-2 { background: #0a1628; }
+        .hero-style-2 .star-trail {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+            animation: trailSpin 25s linear infinite;
+        }
+        .trail-1 { width: 600px; height: 600px; border-color: rgba(255, 255, 255, 0.04); }
+        .trail-2 { width: 800px; height: 800px; animation-duration: 35s; border-color: rgba(255, 255, 255, 0.02); }
+        .trail-3 { width: 400px; height: 400px; animation-duration: 18s; border-color: rgba(100, 180, 255, 0.04); }
+        @keyframes trailSpin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .hero-style-2 .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-style-2 .star {
+            position: absolute;
+            border-radius: 50%;
+            background: #fff;
+            animation: twinkleBig var(--d) ease-in-out infinite alternate;
+        }
+        @keyframes twinkleBig {
+            0% { opacity: 0.1; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1.8); }
+        }
+        .hero-style-2 .shooting-star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 0;
+            animation: shootFast 3.5s linear infinite;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        .hero-style-2 .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(to left, rgba(255,255,255,0.6), transparent);
+            transform: rotate(-45deg);
+            transform-origin: right center;
+        }
+        .shooting-star-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .shooting-star-2 { top: 25%; left: 50%; animation-delay: 1.2s; }
+        .shooting-star-3 { top: 50%; left: 20%; animation-delay: 2.5s; }
+        .shooting-star-4 { top: 70%; left: 60%; animation-delay: 0.8s; }
+        .shooting-star-5 { top: 40%; left: 80%; animation-delay: 3.2s; }
+        @keyframes shootFast {
+            0% { transform: translate(0, 0) rotate(-35deg); opacity: 0; }
+            8% { opacity: 1; }
+            25% { transform: translate(-400px, 250px) rotate(-35deg); opacity: 0; }
+            100% { opacity: 0; }
+        }
+        .hero-style-2 .hero-phone { background: #1a3a5a; border: 1px solid rgba(255,255,255,0.15); }
+        .hero-style-2 .hero-phone i { color: #5a9fd4; }
+        .hero-style-2 .hero-slogan i { color: #5a9fd4; }
+
+        /* ---- 风格3 ---- */
+        .hero-style-3 { background: #0d0718; }
+        .hero-style-3 .core-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(160, 80, 255, 0.12) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            animation: corePulse 3s ease-in-out infinite alternate;
+        }
+        @keyframes corePulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+        }
+        .hero-style-3 .ring-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-style-3 .ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            border: 1px solid rgba(160, 80, 255, 0.05);
+            transform: translate(-50%, -50%);
+        }
+        .ring-1 { width: 400px; height: 400px; animation: ringRotate1 12s linear infinite; }
+        .ring-2 { width: 550px; height: 300px; animation: ringRotate2 18s linear infinite; border-color: rgba(160, 80, 255, 0.04); }
+        .ring-3 { width: 300px; height: 500px; animation: ringRotate3 14s linear infinite; border-color: rgba(160, 80, 255, 0.035); }
+        @keyframes ringRotate1 { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+        @keyframes ringRotate2 { 0% { transform: translate(-50%, -50%) rotate(0deg) scaleX(0.7); } 100% { transform: translate(-50%, -50%) rotate(360deg) scaleX(0.7); } }
+        @keyframes ringRotate3 { 0% { transform: translate(-50%, -50%) rotate(0deg) scaleY(0.6); } 100% { transform: translate(-50%, -50%) rotate(-360deg) scaleY(0.6); } }
+        .hero-style-3 .particle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
+            animation: particleOrbit var(--dur) linear infinite;
+        }
+        .particle-1 { width: 6px; height: 6px; background: rgba(180, 100, 255, 0.7); top: 50%; left: 50%; --dur: 8s; margin-top: -200px; box-shadow: 0 0 15px rgba(180,100,255,0.3); }
+        .particle-2 { width: 4px; height: 4px; background: rgba(200, 130, 255, 0.6); top: 50%; left: 50%; --dur: 11s; margin-top: -160px; animation-delay: 1s; }
+        .particle-3 { width: 8px; height: 8px; background: rgba(160, 80, 255, 0.5); top: 50%; left: 50%; --dur: 14s; margin-top: -280px; animation-delay: 2s; box-shadow: 0 0 20px rgba(160,80,255,0.2); }
+        .particle-4 { width: 5px; height: 5px; background: rgba(220, 160, 255, 0.5); top: 50%; left: 50%; --dur: 9s; margin-top: -120px; animation-delay: 0.5s; }
+        .particle-5 { width: 7px; height: 7px; background: rgba(140, 60, 220, 0.6); top: 50%; left: 50%; --dur: 16s; margin-top: -340px; animation-delay: 3s; box-shadow: 0 0 18px rgba(140,60,220,0.2); }
+        @keyframes particleOrbit {
+            0% { transform: translate(-50%, -50%) rotate(0deg) translateX(200px) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg) translateX(200px) rotate(-360deg); }
+        }
+        .hero-style-3 .hero-phone { background: #1f0f30; border: 1px solid rgba(180, 80, 255, 0.2); }
+        .hero-style-3 .hero-phone i { color: #b06aff; }
+        .hero-style-3 .hero-slogan i { color: #b06aff; }
+
+        /* ---- 风格4 ---- */
+        .hero-style-4 { background: #0a1420; }
+        .hero-style-4 .dot-matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            gap: 0;
+        }
+        .hero-style-4 .dot-matrix .dot-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-style-4 .dot-matrix .dot-cell::after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(100, 180, 255, 0.2);
+            animation: dotPulse var(--d) ease-in-out infinite alternate;
+            transition: 0.3s;
+        }
+        .hero-style-4 .dot-matrix .dot-cell:nth-child(odd)::after { animation-delay: 0.5s; --d: 2.5s; }
+        .hero-style-4 .dot-matrix .dot-cell:nth-child(3n)::after { --d: 3.2s; animation-delay: 1s; }
+        .hero-style-4 .dot-matrix .dot-cell:nth-child(5n+2)::after { --d: 1.8s; animation-delay: 0.3s; }
+        @keyframes dotPulse {
+            0% { opacity: 0.2; transform: scale(0.6); }
+            100% { opacity: 0.9; transform: scale(1.6); background: rgba(100, 200, 255, 0.4); }
+        }
+        .hero-style-4 .scanline {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(100, 200, 255, 0.15), rgba(100, 200, 255, 0.4), rgba(100, 200, 255, 0.15), transparent);
+            z-index: 0;
+            pointer-events: none;
+            animation: scanMove 4s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(100, 200, 255, 0.05);
+        }
+        .scanline-1 { top: 20%; animation-delay: 0s; }
+        .scanline-2 { top: 50%; animation-delay: 1.5s; height: 2px; }
+        .scanline-3 { top: 75%; animation-delay: 3s; height: 2px; }
+        @keyframes scanMove {
+            0% { transform: translateY(-60px); opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { transform: translateY(60px); opacity: 0.3; }
+        }
+        .hero-style-4 .corner-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            pointer-events: none;
+            animation: cornerPulse 5s ease-in-out infinite alternate;
+        }
+        .corner-glow-1 { width: 300px; height: 300px; top: -80px; left: -80px; background: rgba(100, 180, 255, 0.06); }
+        .corner-glow-2 { width: 250px; height: 250px; bottom: -60px; right: -60px; background: rgba(100, 180, 255, 0.04); animation-delay: 2.5s; }
+        @keyframes cornerPulse {
+            0% { transform: scale(0.8); opacity: 0.4; }
+            100% { transform: scale(1.4); opacity: 1; }
+        }
+        .hero-style-4 .hero-phone { background: #0f2235; border: 1px solid rgba(100, 180, 255, 0.2); }
+        .hero-style-4 .hero-phone i { color: #6ab0e6; }
+        .hero-style-4 .hero-slogan i { color: #6ab0e6; }
+
+        /* ---- 风格5 ---- */
+        .hero-style-5 { background: #120a06; }
+        .hero-style-5 .fire-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center bottom, rgba(230, 126, 34, 0.12) 0%, rgba(230, 126, 34, 0.05) 40%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            animation: firePulse 3s ease-in-out infinite alternate;
+        }
+        @keyframes firePulse {
+            0% { transform: translateX(-50%) scale(0.9); opacity: 0.6; }
+            100% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+        }
+        .hero-style-5 .particle-stream {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .hero-style-5 .spark {
+            position: absolute;
+            bottom: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(230, 126, 34, 0.6), rgba(230, 126, 34, 0));
+            animation: sparkRise var(--dur) linear infinite;
+        }
+        .spark-1 { width: 12px; height: 12px; left: 15%; --dur: 6s; animation-delay: 0s; }
+        .spark-2 { width: 8px; height: 8px; left: 30%; --dur: 8s; animation-delay: 1.5s; }
+        .spark-3 { width: 16px; height: 16px; left: 50%; --dur: 7s; animation-delay: 0.5s; }
+        .spark-4 { width: 6px; height: 6px; left: 65%; --dur: 9s; animation-delay: 2s; }
+        .spark-5 { width: 10px; height: 10px; left: 80%; --dur: 5.5s; animation-delay: 1s; }
+        .spark-6 { width: 14px; height: 14px; left: 22%; --dur: 10s; animation-delay: 3s; }
+        .spark-7 { width: 5px; height: 5px; left: 45%; --dur: 7.5s; animation-delay: 2.5s; }
+        .spark-8 { width: 18px; height: 18px; left: 72%; --dur: 6.5s; animation-delay: 0.8s; }
+        @keyframes sparkRise {
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-600px) scale(0.2) rotate(720deg); opacity: 0; }
+        }
+        .hero-style-5 .warm-haze {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 60% 80%, rgba(200, 100, 30, 0.04) 0%, transparent 50%);
+            z-index: 0;
+            pointer-events: none;
+            animation: hazeShift 6s ease-in-out infinite alternate;
+        }
+        @keyframes hazeShift {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+        .hero-style-5 .hero-phone { background: #2a1508; border: 1px solid rgba(230, 126, 34, 0.25); }
+        .hero-style-5 .hero-phone i { color: #E67E22; }
+        .hero-style-5 .hero-slogan i { color: #E67E22; }
+
+        /* ===== 百叶窗叶片 ===== */
+        .blind-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: flex;
+            pointer-events: none;
+        }
+        .blind-leaf {
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            transform-origin: bottom;
+            background: #0b1a26;
+        }
+        .blind-leaf .leaf-content {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 100%;
+        }
+        /* 百叶窗翻转动画 */
+        @keyframes blindFlip {
+            0% { transform: perspective(1000px) rotateX(0deg); opacity: 1; }
+            100% { transform: perspective(1000px) rotateX(90deg); opacity: 0; }
+        }
+        .blind-leaf.animating {
+            animation: blindFlip 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* ===== 控制点 ===== */
+        .hero-dots {
+            position: absolute;
+            bottom: 24px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            z-index: 20;
+        }
+        .hero-dots .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 0;
+        }
+        .hero-dots .dot.active {
+            background: #E67E22;
+            transform: scale(1.25);
+            box-shadow: 0 0 20px rgba(230, 126, 34, 0.35);
+        }
+        .hero-dots .dot:hover { background: rgba(255, 255, 255, 0.6); }
+
+        /* ================================================================
+           子页英雄区 —— 炫彩动画
+           ================================================================ */
+        .sub-hero {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sub-hero .sub-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-size: 400% 400%;
+            animation: subGrad 12s ease infinite;
+        }
+        @keyframes subGrad {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .sub-hero .sub-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            padding: 0 24px;
+        }
+        .sub-hero .sub-content h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .sub-hero .sub-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 8px;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+        .sub-hero .sub-particle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
+            animation: subFloat var(--dur) ease-in-out infinite alternate;
+        }
+        @keyframes subFloat {
+            0% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+            100% { transform: translateY(-60px) scale(1.4); opacity: 0.8; }
+        }
+        .sub-about .sub-bg { background: linear-gradient(125deg, #0d2b4a, #1a5a7a, #0d3a5f, #0d2b4a); }
+        .sub-about .sub-particle { background: rgba(100, 200, 255, 0.2); box-shadow: 0 0 30px rgba(100,200,255,0.1); }
+        .sub-case .sub-bg { background: linear-gradient(125deg, #3d1a0a, #7a3d1a, #5a2d0d, #3d1a0a); }
+        .sub-case .sub-particle { background: rgba(255, 160, 60, 0.2); box-shadow: 0 0 30px rgba(255,160,60,0.1); }
+        .sub-stock .sub-bg { background: linear-gradient(125deg, #0a2d1a, #1a5a3d, #0d3d2a, #0a2d1a); }
+        .sub-stock .sub-particle { background: rgba(60, 255, 160, 0.15); box-shadow: 0 0 30px rgba(60,255,160,0.08); }
+        .sub-material .sub-bg { background: linear-gradient(125deg, #1a0a2d, #3d1a5a, #2a0d3d, #1a0a2d); }
+        .sub-material .sub-particle { background: rgba(200, 100, 255, 0.15); box-shadow: 0 0 30px rgba(200,100,255,0.08); }
+        .sub-news .sub-bg { background: linear-gradient(125deg, #2d0a0a, #5a1a1a, #3d0d0d, #2d0a0a); }
+        .sub-news .sub-particle { background: rgba(255, 80, 80, 0.15); box-shadow: 0 0 30px rgba(255,80,80,0.08); }
+        .sub-contact .sub-bg { background: linear-gradient(125deg, #2d1a0a, #5a3d1a, #3d2d0d, #2d1a0a); }
+        .sub-contact .sub-particle { background: rgba(255, 200, 60, 0.15); box-shadow: 0 0 30px rgba(255,200,60,0.08); }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .hero-wrapper { height: 460px; }
+            .hero-slide h1 { font-size: 2.2rem; }
+            .hero-slide .sub-title { font-size: 1.05rem; }
+            .hero-slide .hero-phone { font-size: 1.1rem; padding: 10px 20px; }
+            .hero-slide .hero-slogan { gap: 12px; font-size: 0.85rem; flex-direction: column; align-items: center; }
+            .sub-hero { height: 200px; }
+            .sub-hero .sub-content h1 { font-size: 2rem; }
+            .sub-hero .sub-content p { font-size: 1rem; }
+            .grid-4-12 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .grid-5 { grid-template-columns: repeat(2, 1fr); }
+            .advantage-grid { grid-template-columns: repeat(2, 1fr); }
+            .partner-grid { grid-template-columns: repeat(3, 1fr); }
+            .hero-style-1 .ring-1a, .hero-style-1 .ring-1b,
+            .hero-style-1 .fp-3, .hero-style-1 .fp-5,
+            .hero-style-2 .trail-2,
+            .hero-style-2 .shooting-star-4, .hero-style-2 .shooting-star-5,
+            .hero-style-3 .ring-2, .hero-style-3 .ring-3,
+            .hero-style-3 .particle-3, .hero-style-3 .particle-5,
+            .hero-style-4 .scanline-2, .hero-style-4 .scanline-3,
+            .hero-style-5 .spark-3, .hero-style-5 .spark-6, .hero-style-5 .spark-8 {
+                display: none;
+            }
+            .hero-style-4 .dot-matrix .dot-cell::after { width: 3px; height: 3px; }
+            .sub-hero .sub-particle { display: none; }
+        }
+        @media (max-width: 1100px) {
+            .grid-4, .grid-5, .advantage-grid, .partner-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .news-two-col { grid-template-columns: 1fr; }
+            .about-home-wrap { flex-direction: column; padding: 35px 25px; }
+        }
+        @media (max-width: 700px) {
+            .grid-4, .grid-5, .advantage-grid, .partner-grid {
+                grid-template-columns: 1fr;
+            }
+            .navbar .container { flex-direction: column; text-align: center; }
+            .nav-links { justify-content: center; }
+            .contact-page-grid { flex-direction: column; }
+            .about-left .stats-row { flex-direction: column; gap: 10px; }
+            .grid-4-12 { grid-template-columns: 1fr 1fr; }
+            .partner-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* ===== 页脚 ===== */
+        footer {
+            background: #102b33;
+            color: #b9cfdf;
+            text-align: center;
+            padding: 32px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== 导航 ========== -->
+    <div class="navbar">
+        <div class="container">
+            <div class="logo-area">
+                <h2>四川佰运翔交通设施</h2>
+                <p>石笼网 · 主动网 · 被动网 · 源头厂家</p>
+            </div>
+            <div class="nav-links">
+                <a data-page="home">首页</a>
+                <a data-page="about-page">公司简介</a>
+                <a data-page="case-page">案例展示</a>
+                <a data-page="stock-page">存货展示</a>
+                <a data-page="material-page">原料展示</a>
+                <a data-page="news-page">新闻资讯</a>
+                <a data-page="contact-page">联系方式</a>
+            </div>
+            <div class="hotline-nav"><i class="fas fa-headset"></i> 1388-000-2338</div>
+        </div>
+    </div>
+
+    <!-- ========== 首页 ========== -->
+    <div id="home" class="page active-page">
+
+        <!-- ===== 首页英雄区（5种风格 + 百叶窗切换） ===== -->
+        <div class="hero-wrapper" id="heroWrapper">
+
+            <!-- 风格1 -->
+            <div class="hero-slide hero-style-1 active" data-index="0">
+                <div class="deco deco-1"></div>
+                <div class="deco deco-2"></div>
+                <div class="deco deco-3"></div>
+                <div class="deco deco-4"></div>
+                <div class="light-ring ring-1a"></div>
+                <div class="light-ring ring-1b"></div>
+                <div class="light-ring ring-1c"></div>
+                <div class="float-particle fp-1"></div>
+                <div class="float-particle fp-2"></div>
+                <div class="float-particle fp-3"></div>
+                <div class="float-particle fp-4"></div>
+                <div class="float-particle fp-5"></div>
+                <div class="hero-content">
+                    <h1>专业丝网防护 · 服务基础建设</h1>
+                    <div class="sub-title">石笼网 · 主动网 · 被动网 · 不锈钢丝网</div>
+                    <div class="hero-phone">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:13880002338">1388-000-2338</a>
+                    </div>
+                    <div class="hero-slogan">
+                        <span><i class="fas fa-check-circle"></i> 品质为本，客户为先</span>
+                        <span><i class="fas fa-check-circle"></i> 诚信经营，合作共赢</span>
+                        <span><i class="fas fa-check-circle"></i> 专注丝网，匠心服务</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 风格2 -->
+            <div class="hero-slide hero-style-2" data-index="1">
+                <div class="star-trail trail-1"></div>
+                <div class="star-trail trail-2"></div>
+                <div class="star-trail trail-3"></div>
+                <div class="stars" id="starContainer"></div>
+                <div class="shooting-star shooting-star-1"></div>
+                <div class="shooting-star shooting-star-2"></div>
+                <div class="shooting-star shooting-star-3"></div>
+                <div class="shooting-star shooting-star-4"></div>
+                <div class="shooting-star shooting-star-5"></div>
+                <div class="hero-content">
+                    <h1>源头工厂 · 全产业链服务</h1>
+                    <div class="sub-title">从原材料到成品，全程品质管控</div>
+                    <div class="hero-phone">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:13880002338">1388-000-2338</a>
+                    </div>
+                    <div class="hero-slogan">
+                        <span><i class="fas fa-check-circle"></i> 规模化生产</span>
+                        <span><i class="fas fa-check-circle"></i> 专业团队</span>
+                        <span><i class="fas fa-check-circle"></i> 快速响应</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 风格3 -->
+            <div class="hero-slide hero-style-3" data-index="2">
+                <div class="core-glow"></div>
+                <div class="ring-container">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                    <div class="particle particle-1"></div>
+                    <div class="particle particle-2"></div>
+                    <div class="particle particle-3"></div>
+                    <div class="particle particle-4"></div>
+                    <div class="particle particle-5"></div>
+                </div>
+                <div class="hero-content">
+                    <h1>可靠产品 · 助力生态治理</h1>
+                    <div class="sub-title">边坡防护 · 河道治理 · 矿山复绿</div>
+                    <div class="hero-phone">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:13880002338">1388-000-2338</a>
+                    </div>
+                    <div class="hero-slogan">
+                        <span><i class="fas fa-check-circle"></i> 质量为本</span>
+                        <span><i class="fas fa-check-circle"></i> 灵活定制</span>
+                        <span><i class="fas fa-check-circle"></i> 持续改进</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 风格4 -->
+            <div class="hero-slide hero-style-4" data-index="3">
+                <div class="dot-matrix" id="dotMatrix"></div>
+                <div class="scanline scanline-1"></div>
+                <div class="scanline scanline-2"></div>
+                <div class="scanline scanline-3"></div>
+                <div class="corner-glow corner-glow-1"></div>
+                <div class="corner-glow corner-glow-2"></div>
+                <div class="hero-content">
+                    <h1>匠心制造 · 值得信赖</h1>
+                    <div class="sub-title">深耕行业，全产业链服务</div>
+                    <div class="hero-phone">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:13880002338">1388-000-2338</a>
+                    </div>
+                    <div class="hero-slogan">
+                        <span><i class="fas fa-check-circle"></i> 品质为本</span>
+                        <span><i class="fas fa-check-circle"></i> 合作共赢</span>
+                        <span><i class="fas fa-check-circle"></i> 持续改进</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 风格5 -->
+            <div class="hero-slide hero-style-5" data-index="4">
+                <div class="fire-glow"></div>
+                <div class="warm-haze"></div>
+                <div class="particle-stream">
+                    <div class="spark spark-1"></div>
+                    <div class="spark spark-2"></div>
+                    <div class="spark spark-3"></div>
+                    <div class="spark spark-4"></div>
+                    <div class="spark spark-5"></div>
+                    <div class="spark spark-6"></div>
+                    <div class="spark spark-7"></div>
+                    <div class="spark spark-8"></div>
+                </div>
+                <div class="hero-content">
+                    <h1>专注丝网 · 守护安全</h1>
+                    <div class="sub-title">专业团队 · 灵活定制 · 快速交付</div>
+                    <div class="hero-phone">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:13880002338">1388-000-2338</a>
+                    </div>
+                    <div class="hero-slogan">
+                        <span><i class="fas fa-check-circle"></i> 质量为本</span>
+                        <span><i class="fas fa-check-circle"></i> 客户为先</span>
+                        <span><i class="fas fa-check-circle"></i> 诚信经营</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 控制点 -->
+            <div class="hero-dots" id="heroDots">
+                <button class="dot active" data-index="0"></button>
+                <button class="dot" data-index="1"></button>
+                <button class="dot" data-index="2"></button>
+                <button class="dot" data-index="3"></button>
+                <button class="dot" data-index="4"></button>
+            </div>
+        </div>
+
+        <!-- ===== 八大优势 ===== -->
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="section-title">核心优势</div>
+                <div class="advantage-grid">
+                    <div class="art-card"><i class="fas fa-industry"></i><h3>规模化生产</h3><p>现代化厂房，数控织网设备</p></div>
+                    <div class="art-card"><i class="fas fa-users"></i><h3>专业团队</h3><p>经验丰富的生产与施工人员</p></div>
+                    <div class="art-card"><i class="fas fa-certificate"></i><h3>质量管控</h3><p>执行严格的产品检测流程</p></div>
+                    <div class="art-card"><i class="fas fa-tachometer-alt"></i><h3>快速响应</h3><p>常备库存，高效调配</p></div>
+                    <div class="art-card"><i class="fas fa-palette"></i><h3>灵活定制</h3><p>可按照客户要求调整规格</p></div>
+                    <div class="art-card"><i class="fas fa-leaf"></i><h3>生态应用</h3><p>产品适用于河道治理、边坡防护等</p></div>
+                    <div class="art-card"><i class="fas fa-chart-line"></i><h3>稳定产能</h3><p>持续供应，保障项目进度</p></div>
+                    <div class="art-card"><i class="fas fa-headset"></i><h3>技术支持</h3><p>提供安装指导与售后服务</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 首页案例展示（12张，4列×3行） ===== -->
+        <div class="section-dark section-padding">
+            <div class="container">
+                <div class="section-title">工程案例</div>
+                <div class="grid-4-12" id="caseHomeGrid"></div>
+                <div class="ad-banner"><i class="fas fa-hard-hat"></i> 边坡防护 / 河道治理 / 矿山复绿 — 众多项目实践</div>
+            </div>
+        </div>
+
+        <!-- ===== 合作伙伴（虚构交通类国企） ===== -->
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="section-title">战略合作伙伴</div>
+                <div class="partner-grid" id="partnerGrid"></div>
+            </div>
+        </div>
+
+        <!-- ===== 存货展示（5张） ===== -->
+        <div class="section-dark section-padding">
+            <div class="container">
+                <div class="section-title">库存展示</div>
+                <div class="grid-5" id="stockHomeGrid"></div>
+                <div class="ad-banner"><i class="fas fa-boxes"></i> 常备各类丝网产品，满足工程急需</div>
+            </div>
+        </div>
+
+        <!-- ===== 原料展示（横向滚动） ===== -->
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="section-title">原料展示</div>
+                <div class="scroll-x-wrapper" id="materialScroll">
+                    <div class="scroll-flex" id="materialList"></div>
+                </div>
+                <div class="ad-banner"><i class="fas fa-flask"></i> 选用优质钢材，注重产品耐久性</div>
+            </div>
+        </div>
+
+        <!-- ===== 正在发货（5张） ===== -->
+        <div class="section-dark section-padding">
+            <div class="container">
+                <div class="section-title">发货实景</div>
+                <div class="grid-5" id="shipGrid"></div>
+                <div class="ad-banner"><i class="fas fa-truck-ramp-box"></i> 专业物流，确保及时交付</div>
+            </div>
+        </div>
+
+        <!-- ===== 正在生产（横向滚动） ===== -->
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="section-title">生产车间</div>
+                <div class="scroll-x-wrapper" id="productionScroll">
+                    <div class="scroll-flex" id="productionList"></div>
+                </div>
+                <div class="ad-banner"><i class="fas fa-microchip"></i> 配备自动化设备，提升生产效率</div>
+            </div>
+        </div>
+
+        <!-- ===== 正在实验（5张） ===== -->
+        <div class="section-dark section-padding">
+            <div class="container">
+                <div class="section-title">质量检测</div>
+                <div class="grid-5" id="labGrid"></div>
+                <div class="ad-banner"><i class="fas fa-vial"></i> 开展多项性能测试，保障产品品质</div>
+            </div>
+        </div>
+
+        <!-- ===== 新闻动态 ===== -->
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="section-title">新闻动态</div>
+                <div class="news-two-col" id="newsList"></div>
+                <div class="ad-banner"><i class="fas fa-bullhorn"></i> 关注行业资讯，分享技术知识</div>
+            </div>
+        </div>
+
+        <!-- ===== 关于佰运翔 ===== -->
+        <div class="section-dark section-padding">
+            <div class="container">
+                <div class="about-home-wrap">
+                    <div class="about-left">
+                        <h2><i class="fas fa-chinese-yuan"></i> 关于佰运翔</h2>
+                        <div class="tagline">专注丝网防护 · 服务基础建设</div>
+                        <p class="desc">
+                            四川佰运翔交通设施工程有限公司成立于2024年，是一家集研发、生产、销售、施工于一体的企业。公司主要产品包括石笼网、主动防护网、被动防护网、不锈钢丝网及相关交通设施。生产基地配备多种加工设备，具备从原材料到成品的生产能力。公司注重产品质量和服务，致力于为客户提供可靠的丝网防护解决方案。
+                        </p>
+                        <div class="stats-row">
+                            <div class="stat-item"><span class="num">·</span><span class="lbl">规模化生产基地</span></div>
+                            <div class="stat-item"><span class="num">·</span><span class="lbl">专业施工团队</span></div>
+                            <div class="stat-item"><span class="num">·</span><span class="lbl">众多项目经验</span></div>
+                            <div class="stat-item"><span class="num">·</span><span class="lbl">持续技术积累</span></div>
+                        </div>
+                        <a href="#" class="btn-about" data-page="about-page">了解更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="about-right">
+                        <h3><i class="fas fa-award"></i> 企业理念</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 质量为本</li>
+                            <li><i class="fas fa-check-circle"></i> 客户为先</li>
+                            <li><i class="fas fa-check-circle"></i> 诚信经营</li>
+                            <li><i class="fas fa-check-circle"></i> 持续改进</li>
+                            <li><i class="fas fa-check-circle"></i> 合作共赢</li>
+                        </ul>
+                        <div class="time-line">
+                            <p><i class="fas fa-calendar-alt" style="color:#E67E22; margin-right:6px;"></i> 2024年 成立</p>
+                            <p><i class="fas fa-trophy" style="color:#E67E22; margin-right:6px;"></i> 服务众多基建项目</p>
+                            <p><i class="fas fa-users" style="color:#E67E22; margin-right:6px;"></i> 专业团队协作</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>蜀ICP备13027337号-3 技术支持：舜王科技 | 四川佰运翔交通设施工程有限公司 版权所有</footer>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- 子页面：公司简介 -->
+    <!-- ================================================================== -->
+    <div id="about-page" class="page">
+        <div class="sub-hero sub-about">
+            <div class="sub-bg"></div>
+            <div class="sub-particle" style="width:80px;height:80px;top:10%;left:5%;--dur:5s;"></div>
+            <div class="sub-particle" style="width:50px;height:50px;bottom:15%;right:8%;--dur:6s;animation-delay:1s;"></div>
+            <div class="sub-particle" style="width:60px;height:60px;top:40%;left:80%;--dur:4.5s;animation-delay:2s;"></div>
+            <div class="sub-particle" style="width:40px;height:40px;top:70%;left:15%;--dur:5.5s;animation-delay:0.5s;"></div>
+            <div class="sub-content">
+                <h1>关于佰运翔</h1>
+                <p>匠心品质，守护边坡安全</p>
+            </div>
+        </div>
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="about-page-content">
+                    <div class="text-col">
+                        <h2 style="color:#1C5D7A; margin-bottom:20px;">专注丝网防护 · 服务基础建设</h2>
+                        <p>四川佰运翔交通设施工程有限公司成立于2024年，总部位于成都市郫都区。公司专注于石笼网、主动防护网、被动防护网、不锈钢丝网及交通设施产品的研发、生产与销售。</p>
+                        <p>公司生产基地配备有拉丝、织网、焊接等生产设备，具备一定的生产能力。产品主要应用于公路铁路边坡防护、水利河道治理、矿山生态修复、地质灾害防治等工程领域。</p>
+                        <p>公司拥有专业的施工团队，可提供现场勘察、方案设计、产品定制、施工指导与售后服务。目前已服务多个工程项目，积累了丰富的实践经验。</p>
+                        <p><strong>企业愿景：</strong>致力于成为丝网防护领域值得信赖的供应商，为生态安全与基础设施建设贡献力量。</p>
+                    </div>
+                    <div class="side-col">
+                        <h3><i class="fas fa-info-circle"></i> 核心信息</h3>
+                        <ul>
+                            <li><i class="fas fa-calendar-alt"></i> 成立时间：2024年</li>
+                            <li><i class="fas fa-map-marker-alt"></i> 总部：成都郫都区</li>
+                            <li><i class="fas fa-industry"></i> 生产基地</li>
+                            <li><i class="fas fa-users"></i> 专业团队</li>
+                            <li><i class="fas fa-trophy"></i> 持续改进</li>
+                            <li><i class="fas fa-globe"></i> 服务全国</li>
+                        </ul>
+                        <hr style="margin:24px 0; border-color:#d0dce8;" />
+                        <h3><i class="fas fa-handshake"></i> 服务领域</h3>
+                        <ul>
+                            <li><i class="fas fa-road"></i> 交通基建</li>
+                            <li><i class="fas fa-water"></i> 水利工程</li>
+                            <li><i class="fas fa-mountain"></i> 矿山治理</li>
+                            <li><i class="fas fa-tree"></i> 生态修复</li>
+                            <li><i class="fas fa-city"></i> 市政建设</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- 子页面：案例展示（16张） -->
+    <!-- ================================================================== -->
+    <div id="case-page" class="page">
+        <div class="sub-hero sub-case">
+            <div class="sub-bg"></div>
+            <div class="sub-particle" style="width:70px;height:70px;top:15%;left:10%;--dur:4.8s;"></div>
+            <div class="sub-particle" style="width:45px;height:45px;bottom:20%;right:12%;--dur:5.5s;animation-delay:1.2s;"></div>
+            <div class="sub-particle" style="width:55px;height:55px;top:50%;left:85%;--dur:5s;animation-delay:2.5s;"></div>
+            <div class="sub-particle" style="width:35px;height:35px;top:75%;left:20%;--dur:6s;animation-delay:0.8s;"></div>
+            <div class="sub-content">
+                <h1>工程案例</h1>
+                <p>众多项目实践 · 品质见证</p>
+            </div>
+        </div>
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="section-title">案例展示</div>
+                <div class="grid-4" id="caseFullGrid"></div>
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- 子页面：存货展示 -->
+    <!-- ================================================================== -->
+    <div id="stock-page" class="page">
+        <div class="sub-hero sub-stock">
+            <div class="sub-bg"></div>
+            <div class="sub-particle" style="width:75px;height:75px;top:10%;right:15%;--dur:5.2s;"></div>
+            <div class="sub-particle" style="width:50px;height:50px;bottom:10%;left:10%;--dur:4.5s;animation-delay:1.5s;"></div>
+            <div class="sub-particle" style="width:60px;height:60px;top:60%;left:80%;--dur:5.8s;animation-delay:0.5s;"></div>
+            <div class="sub-content">
+                <h1>库存展示</h1>
+                <p>常备货品，保障供应</p>
+            </div>
+        </div>
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="section-title">库存展示</div>
+                <div class="grid-5" id="stockFullGrid"></div>
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- 子页面：原料展示 -->
+    <!-- ================================================================== -->
+    <div id="material-page" class="page">
+        <div class="sub-hero sub-material">
+            <div class="sub-bg"></div>
+            <div class="sub-particle" style="width:65px;height:65px;top:20%;left:5%;--dur:5.5s;"></div>
+            <div class="sub-particle" style="width:40px;height:40px;bottom:25%;right:5%;--dur:4.8s;animation-delay:2s;"></div>
+            <div class="sub-particle" style="width:50px;height:50px;top:40%;left:85%;--dur:6s;animation-delay:1s;"></div>
+            <div class="sub-content">
+                <h1>原料品质</h1>
+                <p>从源头保障产品强度</p>
+            </div>
+        </div>
+        <div class="section-dark section-padding">
+            <div class="container">
+                <div class="section-title">原料展示</div>
+                <div class="grid-4" id="materialFullGrid"></div>
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- 子页面：新闻资讯 -->
+    <!-- ================================================================== -->
+    <div id="news-page" class="page">
+        <div class="sub-hero sub-news">
+            <div class="sub-bg"></div>
+            <div class="sub-particle" style="width:70px;height:70px;top:10%;left:20%;--dur:4.5s;"></div>
+            <div class="sub-particle" style="width:45px;height:45px;bottom:15%;right:20%;--dur:5.5s;animation-delay:1.8s;"></div>
+            <div class="sub-particle" style="width:55px;height:55px;top:55%;left:75%;--dur:5s;animation-delay:0.6s;"></div>
+            <div class="sub-content">
+                <h1>新闻中心</h1>
+                <p>行业动态与技术分享</p>
+            </div>
+        </div>
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="section-title">新闻动态</div>
+                <div class="news-two-col" id="newsFullList"></div>
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+
+    <!-- ================================================================== -->
+    <!-- 子页面：联系我们 -->
+    <!-- ================================================================== -->
+    <div id="contact-page" class="page">
+        <div class="sub-hero sub-contact">
+            <div class="sub-bg"></div>
+            <div class="sub-particle" style="width:80px;height:80px;top:5%;right:10%;--dur:5s;"></div>
+            <div class="sub-particle" style="width:50px;height:50px;bottom:10%;left:15%;--dur:4.5s;animation-delay:1.2s;"></div>
+            <div class="sub-particle" style="width:60px;height:60px;top:50%;left:80%;--dur:5.8s;animation-delay:2.5s;"></div>
+            <div class="sub-particle" style="width:40px;height:40px;top:70%;left:10%;--dur:4.2s;animation-delay:0.5s;"></div>
+            <div class="sub-content">
+                <h1>联系我们</h1>
+                <p>欢迎垂询与合作</p>
+            </div>
+        </div>
+        <div class="section-light section-padding">
+            <div class="container">
+                <div class="contact-page-grid">
+                    <div class="contact-info-card">
+                        <h2><i class="fas fa-address-card"></i> 联系方式</h2>
+                        <div class="info-line"><i class="fas fa-user-tie"></i><span>邱先生</span></div>
+                        <div class="info-line"><i class="fas fa-phone-alt"></i><span>1388-000-2338</span></div>
+                        <div class="info-line"><i class="fas fa-phone"></i><span>028-86799896</span></div>
+                        <div class="info-line"><i class="fas fa-fax"></i><span>028-86799896</span></div>
+                        <div class="info-line"><i class="fab fa-qq"></i><span>2396773875</span></div>
+                        <div class="info-line"><i class="fas fa-envelope"></i><span>2396773875@qq.com</span></div>
+                        <div class="info-line"><i class="fas fa-globe"></i><span>www.baiyunxiang.com</span></div>
+                        <div class="info-line"><i class="fas fa-location-dot"></i><span>成都市郫都区唐昌镇鸣凤村301号</span></div>
+                        <div class="info-line"><i class="fas fa-clock"></i><span>工作日 8:00 – 18:00</span></div>
+                    </div>
+                    <div class="contact-form-card">
+                        <h2><i class="fas fa-pen"></i> 在线留言</h2>
+                        <form onsubmit="alert('感谢您的留言，我们会尽快联系您！'); return false;">
+                            <div class="form-group">
+                                <label>您的姓名 *</label>
+                                <input type="text" placeholder="请输入姓名" required />
+                            </div>
+                            <div class="form-group">
+                                <label>联系电话 *</label>
+                                <input type="tel" placeholder="请输入手机号" required />
+                            </div>
+                            <div class="form-group">
+                                <label>留言内容</label>
+                                <textarea placeholder="请描述您的需求或问题..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> 提交留言</button>
+                        </form>
+                        <hr style="margin: 28px 0 16px; border-color:#e9edf2;" />
+                        <div style="background:#eef3f8; border-radius:20px; padding:16px; text-align:center; color:#4a627a;">
+                            <i class="fas fa-map-marked-alt" style="font-size:2rem; color:#1C5D7A; margin-bottom:8px; display:block;"></i>
+                            <p style="font-weight:500;">欢迎来厂参观</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+
+    <!-- ========== JavaScript ========== -->
+    <script>
+        // --------------------------------------------------------------
+        // 1. 图片数据
+        // --------------------------------------------------------------
+        // 所有案例图片（37张）
+        const allCaseImgs = Array.from({ length: 37 }, (_, i) =>
+            `http://img8.dfco.cn/mingli/alzs${String(i + 1).padStart(2, '0')}.jpg`
+        );
+
+        // 指定靠前的5张（06, 05, 07, 09, 16）
+        const priorityIndices = [5, 4, 6, 8, 15]; // 0-based: 06,05,07,09,16
+        const priorityImgs = priorityIndices.map(i => allCaseImgs[i]);
+
+        // 剩余的图片
+        const remainingImgs = allCaseImgs.filter((_, i) => !priorityIndices.includes(i));
+
+        // 首页取12张：5张优先 + 7张补充
+        const homeCaseImgs = [...priorityImgs, ...remainingImgs.slice(0, 7)];
+
+        // 案例展示页取16张：5张优先 + 11张补充
+        const casePageImgs = [...priorityImgs, ...remainingImgs.slice(0, 11)];
+
+        // 其他图片数据
+        const stockImgs = Array.from({ length: 44 }, (_, i) =>
+            `http://img8.dfco.cn/mingli/chzs${String(i + 1).padStart(2, '0')}.jpg`
+        );
+        const materialImgs = Array.from({ length: 32 }, (_, i) =>
+            `http://img8.dfco.cn/mingli/ylzs${String(i + 1).padStart(2, '0')}.jpg`
+        );
+        const shipImgs = Array.from({ length: 33 }, (_, i) =>
+            `http://img8.dfco.cn/mingli/zzfh${String(i + 1).padStart(2, '0')}.jpg`
+        );
+        const prodImgs = Array.from({ length: 13 }, (_, i) =>
+            `http://img8.dfco.cn/mingli/zzsc${String(i + 1).padStart(2, '0')}.jpg`
+        );
+        const labImgs = Array.from({ length: 30 }, (_, i) =>
+            `http://img8.dfco.cn/mingli/zzsy${String(i + 1).padStart(2, '0')}.jpg`
+        );
+
+        // 虚构交通类国企合作伙伴
+        const transportPartners = [
+            { icon: "fas fa-train", name: "中国交通建设集团" },
+            { icon: "fas fa-road", name: "中国铁建股份有限公司" },
+            { icon: "fas fa-ship", name: "中国远洋海运集团" },
+            { icon: "fas fa-plane", name: "中国航空工业集团" },
+            { icon: "fas fa-truck", name: "中国物流集团" },
+            { icon: "fas fa-subway", name: "中国城市轨道交通集团" },
+            { icon: "fas fa-train", name: "中国中车股份有限公司" },
+            { icon: "fas fa-road", name: "中国公路工程咨询集团" },
+            { icon: "fas fa-ship", name: "中国港口建设集团" },
+            { icon: "fas fa-truck", name: "中国铁路物资集团" },
+            { icon: "fas fa-plane", name: "中国航空运输集团" },
+            { icon: "fas fa-subway", name: "中国隧道工程集团" }
+        ];
+
+        const newsData = [
+            { title: "为何白铁丝没有办法代替不锈钢丝", link: "http://www.mingligs.com/xwzx/mlxw/429.html" },
+            { title: "不锈钢网的耐热性能和耐腐蚀的有关知识", link: "http://www.mingligs.com/xwzx/mlxw/428.html" },
+            { title: "不锈钢丝生锈诱因", link: "http://www.mingligs.com/xwzx/mlxw/427.html" },
+            { title: "不锈钢网应该如何选择材质", link: "http://www.mingligs.com/xwzx/mlxw/426.html" },
+            { title: "不锈钢丝网的编织方式、种类规格及应用介绍", link: "http://www.mingligs.com/xwzx/mlxw/424.html" },
+            { title: "常用不锈钢丝网产品材质的温度介绍", link: "http://www.mingligs.com/xwzx/mlxw/423.html" },
+            { title: "不锈钢过滤网的种类及应用介绍", link: "http://www.mingligs.com/xwzx/mlxw/422.html" },
+            { title: "用自钻式锚杆如何进行高陡边坡防护加固处理？", link: "http://www.mingligs.com/xwzx/hydt/399.html" },
+            { title: "国际局势短期扰动钢价 持续关注高质量发展的特钢机会", link: "http://www.mingligs.com/xwzx/mlxw/398.html" },
+            { title: "原料受政策强监管 黑色利润预计将向钢铁倾斜", link: "http://www.mingligs.com/xwzx/mlxw/397.html" },
+            { title: "石笼网 - 防腐石笼网箱在河道治理防洪护坡中应用", link: "http://www.mingligs.com/xwzx/cjbk/396.html" },
+            { title: "石笼网 生态石笼网箱挡墙的施工方法", link: "http://www.mingligs.com/xwzx/cjbk/395.html" }
+        ];
+
+        // --------------------------------------------------------------
+        // 2. 渲染工具
+        // --------------------------------------------------------------
+        function renderGrid(containerId, arr, limit, gridClass) {
+            const el = document.getElementById(containerId);
+            if (!el) return;
+            const list = limit ? arr.slice(0, limit) : arr;
+            el.innerHTML = list.map(url =>
+                `<div class="img-card"><img src="${url}" loading="lazy" alt="产品图"></div>`
+            ).join('');
+        }
+
+        function renderScroll(containerId, arr) {
+            const el = document.getElementById(containerId);
+            if (!el) return;
+            el.innerHTML = arr.map(url =>
+                `<div class="scroll-item"><img src="${url}" loading="lazy" alt="滚动图"></div>`
+            ).join('');
+        }
+
+        function renderPartner() {
+            const el = document.getElementById('partnerGrid');
+            if (!el) return;
+            // 取前6个显示在首页
+            const display = transportPartners.slice(0, 6);
+            el.innerHTML = display.map(p =>
+                `<div class="partner-item"><i class="${p.icon}" style="color:#1C5D7A;"></i><span>${p.name}</span></div>`
+            ).join('');
+        }
+
+        function renderNews(containerId) {
+            const el = document.getElementById(containerId);
+            if (!el) return;
+            el.innerHTML = newsData.map(n =>
+                `<div class="news-item"><a href="${n.link}" target="_blank"><i class="fas fa-angle-right"></i> ${n.title}</a></div>`
+            ).join('');
+        }
+
+        // --------------------------------------------------------------
+        // 3. 生成星星（风格2）
+        // --------------------------------------------------------------
+        function generateStars() {
+            const container = document.getElementById('starContainer');
+            if (!container) return;
+            let html = '';
+            for (let i = 0; i < 120; i++) {
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const size = 2 + Math.random() * 4;
+                const duration = 1.5 + Math.random() * 3;
+                const delay = Math.random() * 4;
+                html += `<div class="star" style="left:${x}%;top:${y}%;width:${size}px;height:${size}px;--d:${duration}s;animation-delay:${delay}s;"></div>`;
+            }
+            container.innerHTML = html;
+        }
+        generateStars();
+
+        // --------------------------------------------------------------
+        // 4. 生成光点矩阵（风格4）
+        // --------------------------------------------------------------
+        function generateDotMatrix() {
+            const container = document.getElementById('dotMatrix');
+            if (!container) return;
+            let html = '';
+            const cols = 12;
+            const rows = 8;
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    const delay = (i * 0.25 + j * 0.12) % 3;
+                    const dur = 1.5 + Math.random() * 2.5;
+                    html += `<div class="dot-cell" style="--d:${dur}s;animation-delay:${delay}s;"></div>`;
+                }
+            }
+            container.innerHTML = html;
+        }
+        generateDotMatrix();
+
+        // --------------------------------------------------------------
+        // 5. 首页英雄区百叶窗切换
+        // --------------------------------------------------------------
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('#heroDots .dot');
+        let currentIndex = 0;
+        let heroInterval;
+        let isTransitioning = false;
+
+        function performBlindSwitch(oldSlide, newSlide, callback) {
+            const leafCount = 12;
+            const leafWidth = 100 / leafCount;
+
+            // 克隆旧slide的内容
+            const clone = oldSlide.cloneNode(true);
+            // 移除克隆中的动画元素，防止冲突
+            clone.querySelectorAll('.deco, .light-ring, .float-particle, .star-trail, .stars, .shooting-star, .core-glow, .ring-container, .particle, .dot-matrix, .scanline, .corner-glow, .fire-glow, .particle-stream, .warm-haze, .spark')
+                .forEach(el => el.style.display = 'none');
+
+            // 创建百叶窗容器
+            const blindContainer = document.createElement('div');
+            blindContainer.className = 'blind-container';
+
+            for (let i = 0; i < leafCount; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'blind-leaf';
+                leaf.style.width = leafWidth + '%';
+
+                // 每个叶片包含克隆内容，通过偏移显示不同部分
+                const leafContent = clone.cloneNode(true);
+                leafContent.className = 'leaf-content';
+                leafContent.style.left = (-i * leafWidth) + '%';
+                leafContent.style.width = (leafCount * 100) + '%';
+                // 移除克隆中可能残留的动画
+                leafContent.querySelectorAll('[style*="animation"]').forEach(el => {
+                    el.style.animation = 'none';
+                });
+
+                leaf.appendChild(leafContent);
+
+                // 设置动画延迟
+                const delay = i * 0.045;
+                leaf.style.animationDelay = delay + 's';
+                leaf.style.animationDuration = '0.7s';
+
+                blindContainer.appendChild(leaf);
+            }
+
+            oldSlide.appendChild(blindContainer);
+
+            // 触发动画
+            requestAnimationFrame(() => {
+                blindContainer.querySelectorAll('.blind-leaf').forEach(leaf => {
+                    leaf.classList.add('animating');
+                });
+            });
+
+            // 动画完成后清理
+            const totalDuration = 0.7 + (leafCount - 1) * 0.045 + 0.1;
+            setTimeout(() => {
+                blindContainer.remove();
+                if (callback) callback();
+            }, totalDuration * 1000);
+        }
+
+        function goToSlide(index) {
+            if (index === currentIndex || isTransitioning) return;
+            isTransitioning = true;
+
+            const oldSlide = slides[currentIndex];
+            const newSlide = slides[index];
+
+            // 新slide先准备好（放在底层）
+            newSlide.style.zIndex = 0;
+            newSlide.classList.add('active');
+
+            // 执行百叶窗切换
+            performBlindSwitch(oldSlide, newSlide, () => {
+                // 旧slide隐藏
+                oldSlide.classList.remove('active');
+                oldSlide.style.zIndex = 0;
+                newSlide.style.zIndex = 1;
+
+                // 更新dots
+                dots.forEach((d, i) => {
+                    d.classList.toggle('active', i === index);
+                });
+
+                isTransitioning = false;
+                currentIndex = index;
+            });
+        }
+
+        function nextSlide() {
+            const next = (currentIndex + 1) % slides.length;
+            goToSlide(next);
+        }
+
+        // 点击dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const idx = parseInt(this.dataset.index);
+                if (idx !== currentIndex) {
+                    clearInterval(heroInterval);
+                    goToSlide(idx);
+                    heroInterval = setInterval(nextSlide, 5500);
+                }
+            });
+        });
+
+        // 自动轮播
+        heroInterval = setInterval(nextSlide, 5500);
+
+        const heroWrapper = document.getElementById('heroWrapper');
+        if (heroWrapper) {
+            heroWrapper.addEventListener('mouseenter', () => clearInterval(heroInterval));
+            heroWrapper.addEventListener('mouseleave', () => {
+                heroInterval = setInterval(nextSlide, 5500);
+            });
+        }
+
+        // 初始化
+        slides.forEach((s, i) => {
+            if (i === 0) {
+                s.classList.add('active');
+                s.style.zIndex = 1;
+            } else {
+                s.style.zIndex = 0;
+            }
+        });
+
+        // --------------------------------------------------------------
+        // 6. 执行渲染
+        // --------------------------------------------------------------
+        // 首页案例（12张）
+        renderGrid('caseHomeGrid', homeCaseImgs);
+        // 案例展示页面（16张）
+        renderGrid('caseFullGrid', casePageImgs);
+
+        renderGrid('stockHomeGrid', stockImgs, 25);
+        renderGrid('stockFullGrid', stockImgs);
+        renderScroll('materialList', materialImgs);
+        renderGrid('materialFullGrid', materialImgs);
+        renderGrid('shipGrid', shipImgs.slice(0, 20));
+        renderScroll('productionList', prodImgs);
+        renderGrid('labGrid', labImgs.slice(0, 20));
+        renderPartner();
+        renderNews('newsList');
+        renderNews('newsFullList');
+
+        // --------------------------------------------------------------
+        // 7. 横向滚动自动播放
+        // --------------------------------------------------------------
+        function autoScrollHorizontal(wrapperId) {
+            const wrap = document.getElementById(wrapperId);
+            if (!wrap) return;
+            let interval;
+            const start = () => {
+                interval = setInterval(() => {
+                    if (wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth) {
+                        wrap.scrollLeft = 0;
+                    } else {
+                        wrap.scrollLeft += 1.2;
+                    }
+                }, 30);
+            };
+            start();
+            wrap.addEventListener('mouseenter', () => clearInterval(interval));
+            wrap.addEventListener('mouseleave', () => start());
+        }
+        autoScrollHorizontal('materialScroll');
+        autoScrollHorizontal('productionScroll');
+
+        // --------------------------------------------------------------
+        // 8. 页面路由
+        // --------------------------------------------------------------
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('[data-page]');
+        const btnAbout = document.querySelector('.btn-about');
+
+        function showPage(id) {
+            pages.forEach(p => p.classList.remove('active-page'));
+            const target = document.getElementById(id);
+            if (target) target.classList.add('active-page');
+            window.scrollTo(0, 0);
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                showPage(link.getAttribute('data-page'));
+            });
+        });
+
+        if (btnAbout) {
+            btnAbout.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('about-page');
+            });
+        }
+    </script>
+
+</body>
+</html>
