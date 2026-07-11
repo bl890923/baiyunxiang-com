@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>不锈钢丝网在海洋工程中的防腐技术进展 - 四川佰运翔交通设施</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background: #f5f9ff;
+    color: #1a2c3e;
+    line-height: 1.5;
+}
+html { scroll-behavior: smooth; }
+.container { max-width: 1300px; margin: 0 auto; padding: 0 24px; }
+
+.navbar {
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02), 0 1px 0 #e9edf2;
+    position: relative; z-index: 100; padding: 16px 0;
+}
+.navbar .container {
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: space-between; gap: 20px;
+}
+.logo-area h2 {
+    font-size: 1.6rem; font-weight: 700;
+    background: linear-gradient(135deg, #1C5D7A, #2C8FAD);
+    background-clip: text; -webkit-background-clip: text; color: transparent;
+    letter-spacing: -0.3px;
+}
+.logo-area p { font-size: 0.8rem; color: #5e7a93; font-weight: 500; }
+.nav-links { display: flex; gap: 32px; flex-wrap: wrap; }
+.nav-links a {
+    color: #2c3e4e; text-decoration: none; font-weight: 600;
+    font-size: 0.95rem; transition: 0.2s; padding: 6px 0;
+    border-bottom: 2px solid transparent;
+}
+.nav-links a:hover { color: #1C7C9E; border-bottom-color: #1C7C9E; }
+.hotline-nav {
+    background: #EEF2F7; padding: 8px 18px; border-radius: 60px;
+    font-weight: 700; color: #1C5D7A; font-size: 0.9rem;
+}
+.hotline-nav i { margin-right: 6px; color: #E67E22; }
+
+.sub-hero {
+    position: relative; width: 100%; height: 280px;
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(125deg, #2d0a0a, #5a1a1a, #3d0d0d, #2d0a0a);
+    background-size: 400% 400%; animation: subGrad 12s ease infinite;
+}
+@keyframes subGrad {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.sub-hero .sub-content { position: relative; z-index: 2; text-align: center; color: white; padding: 0 24px; }
+.sub-hero .sub-content h1 { font-size: 2.2rem; font-weight: 700; text-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+.sub-hero .sub-content p { font-size: 1.1rem; opacity: 0.9; margin-top: 8px; text-shadow: 0 2px 15px rgba(0,0,0,0.2); }
+.sub-hero .sub-particle {
+    position: absolute; border-radius: 50%; z-index: 1; pointer-events: none;
+    background: rgba(255,80,80,0.15); box-shadow: 0 0 30px rgba(255,80,80,0.08);
+    animation: subFloat var(--dur) ease-in-out infinite alternate;
+}
+@keyframes subFloat {
+    0% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+    100% { transform: translateY(-60px) scale(1.4); opacity: 0.8; }
+}
+
+.breadcrumb {
+    background: #f0f4f9; padding: 14px 0; font-size: 0.9rem;
+}
+.breadcrumb .container { display: flex; align-items: center; gap: 8px; }
+.breadcrumb a { color: #1C5D7A; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb span { color: #5e7a93; }
+
+.article-section { padding: 60px 0; }
+.article-card {
+    background: #fff; border-radius: 24px; padding: 48px 50px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.03); border: 1px solid #eef2f6;
+    max-width: 960px; margin: 0 auto;
+}
+.article-card h1 {
+    font-size: 1.9rem; font-weight: 700; color: #1f4e6e; line-height: 1.3;
+    margin-bottom: 20px;
+}
+.article-meta {
+    display: flex; gap: 24px; color: #5e7a93; font-size: 0.95rem;
+    padding-bottom: 20px; border-bottom: 1px solid #eef2f6; margin-bottom: 28px;
+}
+.article-meta i { color: #E67E22; margin-right: 6px; }
+.article-summary {
+    background: #fefaf5; border-left: 4px solid #E67E22;
+    padding: 20px 24px; border-radius: 12px; margin-bottom: 32px;
+    font-size: 1.05rem; line-height: 1.7; color: #2c4052;
+}
+.article-body h2 {
+    font-size: 1.35rem; font-weight: 700; color: #1C5D7A;
+    margin: 32px 0 14px; padding-bottom: 8px;
+    border-bottom: 2px solid #eef2f6;
+}
+.article-body p {
+    font-size: 1.02rem; line-height: 1.8; color: #2c4052;
+    margin-bottom: 16px; text-indent: 2em;
+}
+
+.related-news { margin-top: 48px; padding-top: 32px; border-top: 2px solid #eef2f6; }
+.related-news h3 { font-size: 1.3rem; color: #1f4e6e; margin-bottom: 20px; }
+.news-related-item {
+    padding: 12px 16px; border-radius: 16px;
+    border-left: 4px solid #E67E22; background: #fafcff;
+    margin-bottom: 12px; transition: 0.2s;
+}
+.news-related-item:hover { background: #fefaf5; transform: translateX(4px); }
+.news-related-item a {
+    text-decoration: none; font-weight: 600; color: #1f4e6e;
+    display: flex; align-items: center; gap: 10px; font-size: 0.95rem;
+}
+.news-related-item a i { color: #E67E22; font-size: 1rem; }
+
+footer {
+    background: #102b33; color: #b9cfdf; text-align: center;
+    padding: 32px; font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+    .sub-hero { height: 200px; }
+    .sub-hero .sub-content h1 { font-size: 1.8rem; }
+    .sub-hero .sub-content p { font-size: 1rem; }
+    .sub-hero .sub-particle { display: none; }
+    .article-card { padding: 24px 20px; }
+    .article-card h1 { font-size: 1.5rem; }
+    .article-meta { flex-direction: column; gap: 6px; }
+    .navbar .container { flex-direction: column; text-align: center; }
+    .nav-links { justify-content: center; }
+}
+
+@media (max-width: 1100px) {
+    .nav-links { gap: 16px; }
+}
+
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="container">
+        <div class="logo-area">
+            <h2>四川佰运翔交通设施</h2>
+            <p>石笼网 · 主动网 · 被动网 · 源头厂家</p>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html">首页</a>
+            <a href="../index.html#about-page">公司简介</a>
+            <a href="../index.html#case-page">案例展示</a>
+            <a href="../index.html#stock-page">存货展示</a>
+            <a href="../index.html#material-page">原料展示</a>
+            <a href="../index.html#news-page">新闻资讯</a>
+            <a href="../index.html#contact-page">联系方式</a>
+        </div>
+        <div class="hotline-nav"><i class="fas fa-headset"></i> 1388-000-2338</div>
+    </div>
+</div>
+<div class="sub-hero sub-news">
+    <div class="sub-particle" style="width:70px;height:70px;top:10%;left:20%;--dur:4.5s;"></div>
+    <div class="sub-particle" style="width:45px;height:45px;bottom:15%;right:20%;--dur:5.5s;animation-delay:1.8s;"></div>
+    <div class="sub-particle" style="width:55px;height:55px;top:55%;left:75%;--dur:5s;animation-delay:0.6s;"></div>
+    <div class="sub-content">
+        <h1>不锈钢丝网在海洋工程中的防腐技术进展</h1>
+        <p>2026-06-22</p>
+    </div>
+</div>
+<div class="breadcrumb">
+    <div class="container">
+        <a href="../index.html">首页</a>
+        <i class="fas fa-chevron-right" style="font-size:0.7rem;color:#5e7a93;"></i>
+        <a href="../index.html#news-page">新闻中心</a>
+        <i class="fas fa-chevron-right" style="font-size:0.7rem;color:#5e7a93;"></i>
+        <span>不锈钢丝网在海洋工程中的防腐技术进展</span>
+    </div>
+</div>
+<div class="article-section">
+    <div class="container">
+        <div class="article-card">
+            <h1>不锈钢丝网在海洋工程中的防腐技术进展</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-calendar-alt"></i> 发布日期：2026-06-22</span>
+                <span><i class="fas fa-tag"></i> 行业资讯</span>
+            </div>
+            <div class="article-summary">
+                <i class="fas fa-quote-left" style="color:#E67E22;margin-right:8px;"></i>
+                海洋工程对材料的耐腐蚀性能提出了极高要求，不锈钢丝网作为关键的过滤、防护材料在海洋平台、海水淡化、港口码头等场景中发挥着重要作用。本文综述了近年来不锈钢丝网在海洋工程中的防腐技术进展。
+            </div>
+            <div class="article-body">
+                <h2>“一、海洋环境中不锈钢丝网的腐蚀挑战”</h2>
+<p>海洋环境是自然界中腐蚀性最为苛刻的大气环境之一。海洋大气中含有高浓度的氯离子（Cl-）、高湿度（相对湿度常在80%以上）和强烈的紫外线照射，对金属材料形成严重的腐蚀威胁。此外，海洋飞溅区不仅受到海水周期性浸润，还承受海浪冲击和干湿交替作用，是腐蚀最为严重的区域。不锈钢丝网在海水中还会面临点蚀、缝隙腐蚀、应力腐蚀开裂和微生物腐蚀等多种腐蚀形式。</p>
+<h2>“二、材料升级：从304到超级不锈钢”</h2>
+<p>为提升不锈钢丝网在海洋环境中的服役寿命，材料选型呈明显的升级趋势。304不锈钢在海洋大气环境下仅适用于内陆或近岸轻度腐蚀区，使用寿命通常为3-5年。316L不锈钢因添加了钼元素，耐点蚀指数（PREN）从304的约19提升至约25，在海洋大气环境中的使用寿命可延长至8-12年。对于海水浸泡区和飞溅区等苛刻环境，推荐使用超级奥氏体不锈钢或双相不锈钢，使用寿命可达15-25年。</p>
+<h2>“三、表面处理技术提升”</h2>
+<p>除了材料升级，表面处理技术也是提升不锈钢丝网海洋防腐能力的重要手段：（1）电解抛光：通过电化学方法去除不锈钢表面加工硬化层和杂质，恢复并增强钝化膜，提升耐腐蚀性30%-50%；（2）化学钝化：将不锈钢丝网在硝酸或柠檬酸溶液中浸泡，形成均匀致密的钝化膜；（3）有机涂层：在不锈钢表面喷涂环氧富锌底漆+聚氨酯面漆的复合涂层体系，提供额外屏障保护；（4）纳米涂层：采用溶胶-凝胶法在丝网表面形成SiO2或TiO2纳米薄膜，进一步提高防腐性能。</p>
+<h2>“四、工程应用与前景展望”</h2>
+<p>随着国内海洋工程和海水淡化产业的快速发展，耐腐蚀不锈钢丝网的需求将持续增长。据行业预测，2027年海洋工程领域不锈钢丝网市场规模将达到120亿元。建议不锈钢丝网生产企业提前布局高性能产品线，掌握双相不锈钢、超级奥氏体不锈钢等高端材料的生产工艺。</p>
+
+            </div>
+            <div class="related-news">
+                <h3><i class="fas fa-newspaper"></i> 相关新闻推荐</h3>
+                <div class="news-related-item"><a href="news-19.html"><i class="fas fa-angle-right"></i> 柔性防护网在雪崩防护中的创新应用</a></div>
+<div class="news-related-item"><a href="news-21.html"><i class="fas fa-angle-right"></i> 主动防护网锚固系统优化设计提升边坡稳定性</a></div>
+<div class="news-related-item"><a href="news-1.html"><i class="fas fa-angle-right"></i> 2026年石笼网行业报告：年产量突破3.2亿平方米，防腐升级成趋势</a></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<footer>蜀ICP备13027337号-3 技术支持：舜王科技 | 四川佰运翔交通设施工程有限公司 版权所有</footer>
+</body>
+</html>

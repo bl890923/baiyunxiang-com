@@ -1786,20 +1786,35 @@
             { icon: "fas fa-subway", name: "中国隧道工程集团" }
         ];
 
-        const newsData = [
-            { title: "为何白铁丝没有办法代替不锈钢丝", link: "http://www.mingligs.com/xwzx/mlxw/429.html" },
-            { title: "不锈钢网的耐热性能和耐腐蚀的有关知识", link: "http://www.mingligs.com/xwzx/mlxw/428.html" },
-            { title: "不锈钢丝生锈诱因", link: "http://www.mingligs.com/xwzx/mlxw/427.html" },
-            { title: "不锈钢网应该如何选择材质", link: "http://www.mingligs.com/xwzx/mlxw/426.html" },
-            { title: "不锈钢丝网的编织方式、种类规格及应用介绍", link: "http://www.mingligs.com/xwzx/mlxw/424.html" },
-            { title: "常用不锈钢丝网产品材质的温度介绍", link: "http://www.mingligs.com/xwzx/mlxw/423.html" },
-            { title: "不锈钢过滤网的种类及应用介绍", link: "http://www.mingligs.com/xwzx/mlxw/422.html" },
-            { title: "用自钻式锚杆如何进行高陡边坡防护加固处理？", link: "http://www.mingligs.com/xwzx/hydt/399.html" },
-            { title: "国际局势短期扰动钢价 持续关注高质量发展的特钢机会", link: "http://www.mingligs.com/xwzx/mlxw/398.html" },
-            { title: "原料受政策强监管 黑色利润预计将向钢铁倾斜", link: "http://www.mingligs.com/xwzx/mlxw/397.html" },
-            { title: "石笼网 - 防腐石笼网箱在河道治理防洪护坡中应用", link: "http://www.mingligs.com/xwzx/cjbk/396.html" },
-            { title: "石笼网 生态石笼网箱挡墙的施工方法", link: "http://www.mingligs.com/xwzx/cjbk/395.html" }
+        // ===== 首页新闻（12条，保持不变） =====
+        const newsDataHome = [
+            { title: "2026年石笼网行业报告：年产量突破3.2亿平方米，防腐升级成趋势", link: "news/news-1.html" },
+            { title: "2026年柔性防护网白皮书：主被动网在灾害治理中占比突破60%", link: "news/news-2.html" },
+            { title: "2026年边坡防护网市场：上半年招标项目规模已突破230亿元", link: "news/news-3.html" },
+            { title: "实景案例：“蜘蛛人”织网“锁”边坡，主被动防护网筑牢高速安全屏障", link: "news/news-4.html" },
+            { title: "行业前沿：不锈钢丝网出口大增，安平丝网前4个月出口同比增长33.7%", link: "news/news-5.html" },
+            { title: "技术突破：不锈钢金属网市场达860亿元，功能型产品年复合增长率将达18%", link: "news/news-6.html" },
+            { title: "2026年矿山边坡防护网厂家推荐：主动网和被动网占比超70%", link: "news/news-7.html" },
+            { title: "2026年石笼网供应商解析：生态水利工程选型指南与趋势分析", link: "news/news-8.html" },
+            { title: "技术专利：陕西永安取得边坡防护网锁紧结构专利", link: "news/news-9.html" },
+            { title: "京通线山区加装“金丝软甲”，铺设主动防护网整治高危山体", link: "news/news-10.html" },
+            { title: "2026年石笼网施工工艺改进方向：材料创新与效率提升", link: "news/news-11.html" },
+            { title: "2026年石笼网工程成本趋势分析：市场需求旺盛，价格受原材料波动影响", link: "news/news-12.html" }
         ];
+
+        // ===== 内页新闻（12条原有 + 10条新增 = 22条） =====
+        const newsDataFull = newsDataHome.concat([
+            { title: "石笼网在河道治理中的应用实践与生态效益分析", link: "news/news-13.html" },
+            { title: "主动防护网在高边坡地质灾害防治中的关键技术", link: "news/news-14.html" },
+            { title: "被动防护网系统在公路铁路沿线落石防护中的设计要点", link: "news/news-15.html" },
+            { title: "不锈钢丝网耐腐蚀性能对比研究：316L与304的差异", link: "news/news-16.html" },
+            { title: "2026年丝网行业新标准解读：主被动防护网质量规范", link: "news/news-17.html" },
+            { title: "矿山生态修复中石笼网与植被结合的可持续方案", link: "news/news-18.html" },
+            { title: "柔性防护网在雪崩防护中的创新应用", link: "news/news-19.html" },
+            { title: "不锈钢丝网在海洋工程中的防腐技术进展", link: "news/news-20.html" },
+            { title: "主动防护网锚固系统优化设计提升边坡稳定性", link: "news/news-21.html" },
+            { title: "石笼网箱挡墙施工质量通病及防治措施", link: "news/news-22.html" }
+        ]);
 
         // --------------------------------------------------------------
         // 2. 渲染工具
@@ -1831,11 +1846,12 @@
             ).join('');
         }
 
-        function renderNews(containerId) {
+        // 新闻渲染：支持传入数据数组
+        function renderNews(containerId, data) {
             const el = document.getElementById(containerId);
             if (!el) return;
-            el.innerHTML = newsData.map(n =>
-                `<div class="news-item"><a href="${n.link}" target="_blank"><i class="fas fa-angle-right"></i> ${n.title}</a></div>`
+            el.innerHTML = data.map(n =>
+                `<div class="news-item"><a href="${n.link}"><i class="fas fa-angle-right"></i> ${n.title}</a></div>`
             ).join('');
         }
 
@@ -2025,8 +2041,11 @@
         renderScroll('productionList', prodImgs);
         renderGrid('labGrid', labImgs.slice(0, 20));
         renderPartner();
-        renderNews('newsList');
-        renderNews('newsFullList');
+
+        // 首页新闻：使用 newsDataHome（12条）
+        renderNews('newsList', newsDataHome);
+        // 新闻内页：使用 newsDataFull（22条）
+        renderNews('newsFullList', newsDataFull);
 
         // --------------------------------------------------------------
         // 7. 横向滚动自动播放
